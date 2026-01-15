@@ -1,0 +1,11 @@
+#!/bin/bash
+# Kontroll av känsliga filer
+FILES=("/etc/passwd" "/etc/shadow")
+for file in "${FILES[@]}"; do
+    if [ ! -r "$file" ]; then
+        echo "$(date): FEL - Kan ej läsa $file" >> /var/log/security_audit.log
+    else
+        perms=$(stat -c "%a" "$file")
+        echo "$(date): INFO - $file har rättigheter $perms" >> /var/log/security_audit.log
+    fi
+done

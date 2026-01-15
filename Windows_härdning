@@ -1,0 +1,5 @@
+# Lista administratörer
+$admins = Get-LocalGroupMember -Group "Administrators"
+foreach ($user in $admins) {
+    Write-Output "$(Get-Date) INFO - $($user.Name) är administratör" >> C:\Logs\SecurityAudit.log
+}

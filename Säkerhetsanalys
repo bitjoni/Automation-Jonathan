@@ -1,0 +1,6 @@
+def detect_anomalies(logs):
+    anomalies = []
+    for entry in logs:
+        if entry['event_type'] == 'login' and entry['failed_attempts'] > 5:
+            anomalies.append(entry)
+    return anomalies
